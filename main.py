@@ -7,7 +7,7 @@ with open('Modelo_Pred.pkl', 'rb') as model_file:
     model = pickle.load(model_file)
 
 # Crear app en streamlit
-st.title("Credit Card Default Prediction Dashboard")
+st.title("Predicción de incumplimiento de pago de tarjetas de crédito")
 
 st.sidebar.header("Informacion del usuario")
 
