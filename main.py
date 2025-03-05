@@ -82,6 +82,8 @@ if st.sidebar.button("Predecir"):
     # Hacer las predicciones usando el modelo creado
     predicted_default = model.predict(user_input_data)
 
+    print("Predicción:", predicted_default)  
+    print("Datos de entrada:", user_input_data)
     # Mostrar el resultado de la predicción
     st.subheader("Resultado de la predicción")
     if predicted_default[0] == 1:
