@@ -10,7 +10,7 @@ with open('Modelo_Pred.pkl', 'rb') as model_file:
 st.title("Credit Card Default Prediction Dashboard")
 
 # Add input fields for user input
-st.sidebar.header("User Input Features")
+st.sidebar.header("Informacion del usuario")
 
 # Input fields for each feature
 limit_bal = st.sidebar.slider("LIMIT_BAL (Amount of Credit in NT dollars)", 0, 1000000, 50000)
