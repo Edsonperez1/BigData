@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import pickle
+from sklearn.preprocessing import StandardScaler
 
 # Cargar el modelo ya entrenado en pickle
 with open('Modelo_Pred.pkl', 'rb') as model_file:
@@ -76,14 +77,12 @@ user_input_data = pd.DataFrame({
     "PAY_AMT5": [pay_amt_may],
     "PAY_AMT6": [pay_amt_apr]
 })
-
+user_input_data_scaled = scaler.transform(user_input_data)
 # Botón para predecir
 if st.sidebar.button("Predecir"):
     # Hacer las predicciones usando el modelo creado
     predicted_default = model.predict(user_input_data)
 
-    print("Predicción:", predicted_default)  
-    print("Datos de entrada:", user_input_data)
     # Mostrar el resultado de la predicción
     st.subheader("Resultado de la predicción")
     if predicted_default[0] == 1:
