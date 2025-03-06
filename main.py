@@ -84,7 +84,7 @@ if st.sidebar.button("Predecir"):
     # Mostrar el resultado de la predicción
     st.subheader("Resultado de la predicción")
     if predicted_default[0] == 1:
-        st.write("Se predice que es poco probable que el cliente incumpla con el pago de su tarjeta de crédito.")
-    else:
         st.write("Se predice que el cliente puede incumplir con el pago de su tarjeta de crédito.")
+    else:
+        st.write("Se predice que es poco probable que el cliente incumpla con el pago de su tarjeta de crédito.")
 
