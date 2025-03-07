@@ -79,9 +79,8 @@ user_input_data = pd.DataFrame({
 })
 # Botón para predecir
 if st.sidebar.button("Predecir"):
-    user_input_data_scaled = scaler.transform(user_input_data)
     # Hacer las predicciones usando el modelo creado
-    predicted_default = model.predict(user_input_data_scaled)
+    predicted_default = model.predict(user_input_data)
 
     # Mostrar el resultado de la predicción
     st.subheader("Resultado de la predicción")
