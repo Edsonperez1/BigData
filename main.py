@@ -77,9 +77,9 @@ user_input_data = pd.DataFrame({
     "PAY_AMT5": [pay_amt_may],
     "PAY_AMT6": [pay_amt_apr]
 })
-user_input_data_scaled = scaler.transform(user_input_data)
 # Botón para predecir
 if st.sidebar.button("Predecir"):
+    user_input_data_scaled = scaler.transform(user_input_data)
     # Hacer las predicciones usando el modelo creado
     predicted_default = model.predict(user_input_data_scaled)
 
