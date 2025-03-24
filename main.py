@@ -3,7 +3,7 @@ import pandas as pd
 import pickle
 
 # Load the pre-trained model using pickle
-with open('Modelo_Prediccion.pkl', 'rb') as model_file:
+with open('Modelo_Pred.pkl', 'rb') as model_file:
     model = pickle.load(model_file)
 
 # Create a Streamlit web app
