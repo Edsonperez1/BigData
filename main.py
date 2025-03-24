@@ -2,61 +2,62 @@ import streamlit as st
 import pandas as pd
 import pickle
 
-# Cargar el modelo ya entrenado en pickle
+# Load the pre-trained model using pickle
 with open('Modelo_Prediccion.pkl', 'rb') as model_file:
     model = pickle.load(model_file)
 
-# Crear app en streamlit
-st.title("Predicción de incumplimiento de pago de tarjetas de crédito")
+# Create a Streamlit web app
+st.title("Credit Card Default Prediction Dashboard")
 
-st.sidebar.header("Informacion del usuario")
+# Add input fields for user input
+st.sidebar.header("User Input Features")
 
-# Agregar inputs
-limit_bal = st.sidebar.slider("LIMIT_BAL (Cantidad del credito en dolares de taiwan)", 0, 1000000, 50000)
-sex = st.sidebar.radio("SEXO (Género)", ["Hombre", "Mujer"])
-education = st.sidebar.radio("EDUCACION (Nivel de Educación)", ["Posgrado", "Universidad", "Secundaria", "Otros"])
-marriage = st.sidebar.radio("MATRIMONIO (Estado Civil)", ["Casado", "Soltero", "Otros"])
-age = st.sidebar.slider("EDAD (Años)", 20, 80, 30)
-pay_status_sept = st.sidebar.slider("PAY_0 (Estado de pago de Septiembre, 2005)", -2, 8, 0)
-pay_status_aug = st.sidebar.slider("PAY_2 (Estado de pago de Agosto, 2005)", -2, 8, 0)
-pay_status_jul = st.sidebar.slider("PAY_3 (Estado de pago de Julio, 2005)", -2, 8, 0)
-pay_status_jun = st.sidebar.slider("PAY_4 (Estado de pago de Junio, 2005)", -2, 8, 0)
-pay_status_may = st.sidebar.slider("PAY_5 (Estado de pago de Mayo, 2005)", -2, 8, 0)
-pay_status_apr = st.sidebar.slider("PAY_6 (Estado de pago de Abril, 2005)", -2, 8, 0)
-bill_amt_sept = st.sidebar.slider("BILL_AMT1 (Estado de cuenta de Septiembre, 2005)", 0, 1000000, 5000)
-bill_amt_aug = st.sidebar.slider("BILL_AMT2 (Estado de cuenta de Agosto, 2005)", 0, 1000000, 5000)
-bill_amt_jul = st.sidebar.slider("BILL_AMT3 (Estado de cuenta de Julio, 2005)", 0, 1000000, 5000)
-bill_amt_jun = st.sidebar.slider("BILL_AMT4 (Estado de cuenta de Junio, 2005)", 0, 1000000, 5000)
-bill_amt_may = st.sidebar.slider("BILL_AMT5 (Estado de cuenta de Mayo, 2005)", 0, 1000000, 5000)
-bill_amt_apr = st.sidebar.slider("BILL_AMT6 (Estado de cuenta de Abril, 2005)", 0, 1000000, 5000)
-pay_amt_sept = st.sidebar.slider("PAY_AMT1 (Pago anterior en Septiembre, 2005)", 0, 100000, 500)
-pay_amt_aug = st.sidebar.slider("PAY_AMT2 (Pago anterior en Agosto, 2005)", 0, 100000, 500)
-pay_amt_jul = st.sidebar.slider("PAY_AMT3 (Pago anterior en Julio, 2005)", 0, 100000, 500)
-pay_amt_jun = st.sidebar.slider("PAY_AMT4 (Pago anterior en Junio 2005)", 0, 100000, 500)
-pay_amt_may = st.sidebar.slider("PAY_AMT5 (Pago anterior en Mayo, 2005)", 0, 100000, 500)
-pay_amt_apr = st.sidebar.slider("PAY_AMT6 (Pago anterior en Abril, 2005)", 0, 100000, 500)
+# Input fields for each feature
+limit_bal = st.sidebar.slider("LIMIT_BAL (Amount of Credit in NT dollars)", 0, 1000000, 50000)
+sex = st.sidebar.radio("SEX (Gender)", ["Male", "Female"])
+education = st.sidebar.radio("EDUCATION (Education Level)", ["Graduate School", "University", "High School", "Others"])
+marriage = st.sidebar.radio("MARRIAGE (Marital Status)", ["Married", "Single", "Others"])
+age = st.sidebar.slider("AGE (Age in years)", 20, 80, 30)
+pay_status_sept = st.sidebar.slider("PAY_0 (Repayment status in September, 2005)", -2, 8, 0)
+pay_status_aug = st.sidebar.slider("PAY_2 (Repayment status in August, 2005)", -2, 8, 0)
+pay_status_jul = st.sidebar.slider("PAY_3 (Repayment status in July, 2005)", -2, 8, 0)
+pay_status_jun = st.sidebar.slider("PAY_4 (Repayment status in June, 2005)", -2, 8, 0)
+pay_status_may = st.sidebar.slider("PAY_5 (Repayment status in May, 2005)", -2, 8, 0)
+pay_status_apr = st.sidebar.slider("PAY_6 (Repayment status in April, 2005)", -2, 8, 0)
+bill_amt_sept = st.sidebar.slider("BILL_AMT1 (Bill statement in September, 2005 - NT dollar)", 0, 1000000, 5000)
+bill_amt_aug = st.sidebar.slider("BILL_AMT2 (Bill statement in August, 2005 - NT dollar)", 0, 1000000, 5000)
+bill_amt_jul = st.sidebar.slider("BILL_AMT3 (Bill statement in July, 2005 - NT dollar)", 0, 1000000, 5000)
+bill_amt_jun = st.sidebar.slider("BILL_AMT4 (Bill statement in June, 2005 - NT dollar)", 0, 1000000, 5000)
+bill_amt_may = st.sidebar.slider("BILL_AMT5 (Bill statement in May, 2005 - NT dollar)", 0, 1000000, 5000)
+bill_amt_apr = st.sidebar.slider("BILL_AMT6 (Bill statement in April, 2005 - NT dollar)", 0, 1000000, 5000)
+pay_amt_sept = st.sidebar.slider("PAY_AMT1 (Previous payment in September, 2005 - NT dollar)", 0, 100000, 500)
+pay_amt_aug = st.sidebar.slider("PAY_AMT2 (Previous payment in August, 2005 - NT dollar)", 0, 100000, 500)
+pay_amt_jul = st.sidebar.slider("PAY_AMT3 (Previous payment in July, 2005 - NT dollar)", 0, 100000, 500)
+pay_amt_jun = st.sidebar.slider("PAY_AMT4 (Previous payment in June, 2005 - NT dollar)", 0, 100000, 500)
+pay_amt_may = st.sidebar.slider("PAY_AMT5 (Previous payment in May, 2005 - NT dollar)", 0, 100000, 500)
+pay_amt_apr = st.sidebar.slider("PAY_AMT6 (Previous payment in April, 2005 - NT dollar)", 0, 100000, 500)
 
-# Definir los mapeos para la educación y el estado civil
+# Define mappings for education and marriage
 education_mapping = {
-    "Posgrado": 1,
-    "Universidad": 2,
-    "Secundaria": 3,
-    "Otros": 4
+    "Graduate School": 1,
+    "University": 2,
+    "High School": 3,
+    "Others": 4
 }
 
 marriage_mapping = {
-    "Casado": 1,
-    "Soltero": 2,
-    "Otros": 3
+    "Married": 1,
+    "Single": 2,
+    "Others": 3
 }
 
-# Crear un df con los datos de los inputs
+# Create a DataFrame with user input data
 user_input_data = pd.DataFrame({
     "LIMIT_BAL": [limit_bal],
-    "SEXO": [1 if sex == "Hombre" else 2],  # Mapear 'Hombre' a 1 y 'Mujer' a 2
-    "EDUCACION": [education_mapping[education]],
-    "MATRIMONIO": [marriage_mapping[marriage]],
-    "EDAD": [age],
+    "SEX": [1 if sex == "Male" else 2],  # Map 'Male' to 1 and 'Female' to 2
+    "EDUCATION": [education_mapping[education]],
+    "MARRIAGE": [marriage_mapping[marriage]],
+    "AGE": [age],
     "PAY_0": [pay_status_sept],
     "PAY_2": [pay_status_aug],
     "PAY_3": [pay_status_jul],
@@ -77,14 +78,14 @@ user_input_data = pd.DataFrame({
     "PAY_AMT6": [pay_amt_apr]
 })
 
-# Botón para predecir
-if st.sidebar.button("Predecir"):
-    # Hacer las predicciones usando el modelo creado
+# Predict button
+if st.sidebar.button("Predict"):
+    # Make predictions using the loaded model
     predicted_default = model.predict(user_input_data)
 
-    # Mostrar el resultado de la predicción
-    st.subheader("Resultado de la predicción")
+    # Display the prediction result
+    st.subheader("Prediction Result")
     if predicted_default[0] == 1:
-        st.write("Se predice que el cliente puede incumplir con el pago de su tarjeta de crédito.")
+        st.write("The model predicts that the client may default on their credit card payment.")
     else:
-        st.write("Se predice que es poco probable que el cliente incumpla con el pago de su tarjeta de crédito.")
+        st.write("The model predicts that the client is unlikely to default on their credit card payment.")
