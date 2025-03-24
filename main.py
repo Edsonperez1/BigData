@@ -3,7 +3,7 @@ import pandas as pd
 import pickle
 
 # Cargar el modelo ya entrenado en pickle
-with open('Modelo_Prediccion.pkl', 'rb') as model_file:
+with open('Modelo_Pred.pkl', 'rb') as model_file:
     model = pickle.load(model_file)
 
 # Crear app en streamlit
