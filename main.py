@@ -1,10 +1,9 @@
-
 import streamlit as st
 import pandas as pd
 import pickle
 
 # Cargar el modelo ya entrenado en pickle
-with open('Modelo_Prediccion.pkl', 'rb') as model_file:
+with open('Modelo_Pred.pkl', 'rb') as model_file:
     model = pickle.load(model_file)
 
 # Crear app en streamlit
@@ -77,6 +76,7 @@ user_input_data = pd.DataFrame({
     "PAY_AMT5": [pay_amt_may],
     "PAY_AMT6": [pay_amt_apr]
 })
+
 # Botón para predecir
 if st.sidebar.button("Predecir"):
     # Hacer las predicciones usando el modelo creado
