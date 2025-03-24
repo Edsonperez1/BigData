@@ -15,7 +15,7 @@ st.sidebar.header("Informacion del usuario")
 # Agregar inputs
 limit_bal = st.sidebar.slider("LIMIT_BAL (Cantidad del credito en dolares de taiwan)", 0, 1000000, 50000)
 sex = st.sidebar.radio("SEXO (Género)", ["Hombre", "Mujer"])
-education = st.sidebar.radio("EDUCACION (Nivel de Educación)", ["Posgrado", "Universidad", "Preparatoria", "Otros"])
+education = st.sidebar.radio("EDUCACION (Nivel de Educación)", ["Posgrado", "Universidad", "Secundaria", "Otros"])
 marriage = st.sidebar.radio("MATRIMONIO (Estado Civil)", ["Casado", "Soltero", "Otros"])
 age = st.sidebar.slider("EDAD (Años)", 20, 80, 30)
 pay_status_sept = st.sidebar.slider("PAY_0 (Estado de pago de Septiembre, 2005)", -2, 8, 0)
